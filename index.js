@@ -278,6 +278,14 @@ Object.defineProperty(api, 'azure_storage', {
   }
 });
 
+Object.defineProperty(api, 'Auth0', {
+  configurable: false,
+  enumerable: true,
+  get: function () {
+    return require('auth0');
+  }
+});
+
 // using capital letters because it is a factory
 // it must then be invoked var knex = Knex(...)
 // ref: https://github.com/tgriesser/knex/blob/master/knex.js
