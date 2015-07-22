@@ -1,12 +1,12 @@
-var ApplicationError = require('./ApplicationError');
+var AuthorizationError = require('./AuthorizationError');
 
 function UnauthorizedError (message) {
-  ApplicationError.call(this, 'unauthorized', message);
-  this.description = message;
-  this.name = 'UnauthorizedError';
+  AuthorizationError.call(this, 'unauthorizederror', message);
+  
+  this.status_code = 401;
 }
 
-UnauthorizedError.prototype = Object.create(ApplicationError.prototype);
+UnauthorizedError.prototype = Object.create(AuthorizationError.prototype);
 UnauthorizedError.prototype.constructor = UnauthorizedError;
 
 module.exports = UnauthorizedError;

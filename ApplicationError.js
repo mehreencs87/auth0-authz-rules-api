@@ -5,10 +5,13 @@ var AuthorizationError = require('./AuthorizationError');
  * to the target application via its callback url.
  */
 function ApplicationError (code, message, additionalInformation) {
+  AuthorizationError.call(this, code, message);
+  
   if ( additionalInformation ) {
     this.additionalInformation = additionalInformation;
   }
-  AuthorizationError.call(this, code, message);
+  
+  this.status_code = 500;
 }
 
 ApplicationError.prototype = Object.create(AuthorizationError.prototype);
