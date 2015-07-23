@@ -1,9 +1,9 @@
 var AuthorizationError = require('./AuthorizationError');
 
-function ValidationError (message) {
-  AuthorizationError.call(this, 'validationerror', message);
+function ValidationError (code, message) {
+  AuthorizationError.call(this, code, message);
   
-  this.description = message;
+  this.description = message; // Keep consistent w/ legacy api
   this.status_code = 400;
 }
 

@@ -10,7 +10,7 @@ function AuthorizationError(code, message) {
   // `this.constructor` will refer to the caller's correct name
   this.name = this.constructor.name;
   
-  this.code = code || this.name.toLowerCase();
+  this.code = code;
   this.message = message;
   
   // By default, we start with a 500 (internal server error).
