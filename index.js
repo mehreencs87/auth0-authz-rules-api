@@ -1,4 +1,3 @@
-var util = require('util');
 
 Function.prototype.stringify = function () { 
   var match = this.toString().match(/[^]*\/\*([^]*)\*\/\s*\}$/);
@@ -6,6 +5,8 @@ Function.prototype.stringify = function () {
 };
 
 function _wrap_console() {
+    var util = require('util');
+    
     var new_console = {
         log: function () {
             new_console._stdout.push(util.format.apply(global, arguments));
