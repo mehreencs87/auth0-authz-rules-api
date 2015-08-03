@@ -141,6 +141,10 @@ exports.api = {};
 extend(exports.api);
 
 function extend (api) {
+  if (api.__auth0_api) return;
+  
+  api.__auth0_api = true;
+  
   api.mongo = mongo;
   api.mysql = mysql;
   api.mysql_pool = mysql_pool;
