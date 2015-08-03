@@ -90,7 +90,7 @@ function mysql_pool (options) {
   var mysqlDriver = require('mysql');
 
   if (typeof options === 'string') {
-    var ConnectionConfig = require('mysql/ConnectionConfig');
+    var ConnectionConfig = require('mysql/lib/ConnectionConfig');
     options = ConnectionConfig.parseUrl(options);
   }
 
