@@ -333,7 +333,7 @@ function extend (api) {
     configurable: false,
     enumerable: true,
     get: function () {
-      return require('./ValidationError');
+      return require('./lib/errors/ValidationError');
     }
   });
   
@@ -341,7 +341,7 @@ function extend (api) {
     configurable: false,
     enumerable: true,
     get: function () {
-      return require('./WrongUsernameOrPasswordError');
+      return require('./lib/errors/WrongUsernameOrPasswordError');
     }
   });
   
@@ -349,7 +349,7 @@ function extend (api) {
     configurable: false,
     enumerable: true,
     get: function () {
-      return require('./UnauthorizedError');
+      return require('./lib/errors/UnauthorizedError');
     }
   });
 };
