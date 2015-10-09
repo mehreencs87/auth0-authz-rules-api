@@ -217,6 +217,14 @@ function extend (api) {
     }
   });
   
+  Object.defineProperty(api, 'Auth0', {
+    configurable: false,
+    enumerable: true,
+    get: function (){
+      return require('auth0');
+    }
+  });
+  
   Object.defineProperty(api, 'sqlserver', {
     configurable: false,
     enumerable: true,
