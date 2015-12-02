@@ -1,12 +1,12 @@
 
-Function.prototype.stringify = function () { 
+Function.prototype.stringify = function () {
   var match = this.toString().match(/[^]*\/\*([^]*)\*\/\s*\}$/);
-  return match ? match[1] : ''; 
+  return match ? match[1] : '';
 };
 
 function _wrap_console() {
     var util = require('util');
-    
+
     var new_console = {
         log: function () {
             new_console._stdout.push(util.format.apply(global, arguments));
@@ -132,7 +132,7 @@ function postgres (connString, callback) {
   });
 }
 
-// Allow consumers of the module to expose the api on 
+// Allow consumers of the module to expose the api on
 exports.extend = extend;
 
 // Export a copy of the exposed api
@@ -142,9 +142,9 @@ extend(exports.api);
 
 function extend (api) {
   if (api.__auth0_api) return;
-  
+
   api.__auth0_api = true;
-  
+
   api.mongo = mongo;
   api.mysql = mysql;
   api.mysql_pool = mysql_pool;
@@ -152,7 +152,7 @@ function extend (api) {
   api.ip = ip;
   api._wrap_callback = _wrap_callback;
   api._wrap_console = _wrap_console;
-  
+
   Object.defineProperty(api, 'querystring', {
     configurable: false,
     enumerable: true,
@@ -160,7 +160,7 @@ function extend (api) {
       return require('querystring');
     }
   });
-  
+
   Object.defineProperty(api, 'ObjectID', {
     configurable: false,
     enumerable: true,
@@ -168,7 +168,7 @@ function extend (api) {
       return require('mongodb').ObjectID;
     }
   });
-  
+
   Object.defineProperty(api, 'async', {
     configurable: false,
     enumerable: true,
@@ -176,7 +176,7 @@ function extend (api) {
       return require('async');
     }
   });
-  
+
   Object.defineProperty(api, 'pg', {
     configurable: false,
     enumerable: true,
@@ -184,7 +184,7 @@ function extend (api) {
       return require('pg');
     }
   });
-  
+
   Object.defineProperty(api, 'jwt', {
     configurable: false,
     enumerable: true,
@@ -192,7 +192,7 @@ function extend (api) {
       return require('jsonwebtoken');
     }
   });
-  
+
   Object.defineProperty(api, 'cql', {
     configurable: false,
     enumerable: true,
@@ -200,7 +200,7 @@ function extend (api) {
       return require('node-cassandra-cql');
     }
   });
-  
+
   Object.defineProperty(api, '_', {
     configurable: false,
     enumerable: true,
@@ -208,7 +208,7 @@ function extend (api) {
       return require('lodash');
     }
   });
-  
+
   Object.defineProperty(api, 'Pubnub', {
     configurable: false,
     enumerable: true,
@@ -216,7 +216,7 @@ function extend (api) {
       return require('pubnub');
     }
   });
-  
+
   Object.defineProperty(api, 'Auth0', {
     configurable: false,
     enumerable: true,
@@ -224,7 +224,7 @@ function extend (api) {
       return require('auth0');
     }
   });
-  
+
   Object.defineProperty(api, 'sqlserver', {
     configurable: false,
     enumerable: true,
@@ -241,7 +241,15 @@ function extend (api) {
       return sqlserver;
     }
   });
-  
+
+  Object.defineProperty(api, 'uuid', {
+    configurable: false,
+    enumerable: true,
+    get: function () {
+      return require('uuid');
+    }
+  });
+
   Object.defineProperty(api, 'request', {
     configurable: false,
     enumerable: true,
@@ -249,7 +257,7 @@ function extend (api) {
       return require('request');
     }
   });
-  
+
   Object.defineProperty(api, 'bcrypt', {
     configurable: false,
     enumerable: true,
@@ -257,7 +265,7 @@ function extend (api) {
       return require('bcrypt');
     }
   });
-  
+
   Object.defineProperty(api, 'crypto', {
     configurable: false,
     enumerable: true,
@@ -265,7 +273,7 @@ function extend (api) {
       return require('crypto');
     }
   });
-  
+
   Object.defineProperty(api, 'pbkdf2', {
     configurable: false,
     enumerable: true,
@@ -273,7 +281,7 @@ function extend (api) {
       return require('easy-pbkdf2')();
     }
   });
-  
+
   Object.defineProperty(api, 'xmldom', {
     configurable: false,
     enumerable: true,
@@ -281,7 +289,7 @@ function extend (api) {
       return require('xmldom');
     }
   });
-  
+
   Object.defineProperty(api, 'xml2js', {
     configurable: false,
     enumerable: true,
@@ -289,7 +297,7 @@ function extend (api) {
       return require('xml2js');
     }
   });
-  
+
   Object.defineProperty(api, 'xpath', {
     configurable: false,
     enumerable: true,
@@ -297,7 +305,7 @@ function extend (api) {
       return require('xpath');
     }
   });
-  
+
   Object.defineProperty(api, 'couchbase', {
     configurable: false,
     enumerable: true,
@@ -305,7 +313,7 @@ function extend (api) {
       return require('couchbase');
     }
   });
-  
+
   Object.defineProperty(api, 'xtend', {
     configurable: false,
     enumerable: true,
@@ -313,7 +321,7 @@ function extend (api) {
       return require('xtend@1.0.3');
     }
   });
-  
+
   Object.defineProperty(api, 'q', {
     configurable: false,
     enumerable: true,
@@ -321,7 +329,7 @@ function extend (api) {
       return require('q');
     }
   });
-  
+
   Object.defineProperty(api, 'azure_storage', {
     configurable: false,
     enumerable: true,
@@ -329,7 +337,7 @@ function extend (api) {
       return require('azure-storage');
     }
   });
-  
+
   // using capital letters because it is a factory
   // it must then be invoked var knex = Knex(...)
   // ref: https://github.com/tgriesser/knex/blob/master/knex.js
@@ -340,7 +348,7 @@ function extend (api) {
       return require('knex');
     }
   });
-  
+
   Object.defineProperty(api, 'ValidationError', {
     configurable: false,
     enumerable: true,
@@ -348,7 +356,7 @@ function extend (api) {
       return require('./lib/errors/ValidationError');
     }
   });
-  
+
   Object.defineProperty(api, 'WrongUsernameOrPasswordError', {
     configurable: false,
     enumerable: true,
@@ -356,7 +364,7 @@ function extend (api) {
       return require('./lib/errors/WrongUsernameOrPasswordError');
     }
   });
-  
+
   Object.defineProperty(api, 'UnauthorizedError', {
     configurable: false,
     enumerable: true,
