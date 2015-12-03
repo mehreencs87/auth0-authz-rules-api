@@ -25,6 +25,8 @@ var expectedFields = [
     'sqlserver',
     'request',
     'bcrypt',
+    'uuid',
+    'Auth0',
     'crypto',
     'pbkdf2',
     'xmldom',
@@ -89,14 +91,14 @@ lab.experiment('The api exposes Error classes', {parallel: true}, function () {
                 return fixture.fields[arg];
             });
             var err = new (Function.prototype.bind.apply(constructor, [null].concat(args)))();
-            
+
             expect(err).to.be.an.instanceof(Error);
             expect(err).to.be.an.instanceof(constructor);
         });
-        
+
         done();
     });
-    
+
     lab.test('that have common fields', function (done) {
         Object.keys(errorClasses).forEach(function (errorClass) {
             var fixture = errorClasses[errorClass];
@@ -105,15 +107,15 @@ lab.experiment('The api exposes Error classes', {parallel: true}, function () {
                 return fixture.fields[arg];
             });
             var err = new (Function.prototype.bind.apply(constructor, [null].concat(args)))();
-            
+
             expect(err.message).to.be.a.string();
             expect(err.code).to.be.a.string();
             expect(err.statusCode).to.be.a.number();
         });
-        
+
         done();
     });
-    
+
     lab.test('that have all expected fields with the correct values', function (done) {
         Object.keys(errorClasses).forEach(function (errorClass) {
             var fixture = errorClasses[errorClass];
@@ -122,14 +124,14 @@ lab.experiment('The api exposes Error classes', {parallel: true}, function () {
                 return fixture.fields[arg];
             });
             var err = new (Function.prototype.bind.apply(constructor, [null].concat(args)))();
-            
+
             Object.keys(fixture.fields).forEach(function (field) {
                 var value = fixture.fields[field];
-                
+
                 expect(err[field]).to.equal(value);
             });
         });
-        
+
         done();
     });
 });
@@ -137,25 +139,25 @@ lab.experiment('The api exposes Error classes', {parallel: true}, function () {
 lab.experiment('Api extension', {parallel: true}, function () {
     lab.test('can be used to expose the api on any object', function (done) {
         var foo = {};
-        
+
         Api.extend(foo);
-        
+
         expect(Object.keys(foo)).to.only.include(expectedFields);
         done();
     });
-    
+
     lab.test('will not extend a given object twice', function (done) {
         var foo = {};
-        
+
         Api.extend(foo);
-        
+
         var apiMongo = foo.mongo;
-        
+
         foo.mongo = 'mongooooo!!';
-        
+
         // Let's try re-extending and look at the mongo api again
         Api.extend(foo);
-        
+
         expect(foo.mongo).to.equal('mongooooo!!');
         expect(foo.mongo).to.not.equal(apiMongo);
 
