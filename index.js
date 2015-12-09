@@ -145,6 +145,7 @@ function extend (api) {
 
   api.__auth0_api = true;
 
+  api.Buffer = Buffer;
   api.mongo = mongo;
   api.mysql = mysql;
   api.mysql_pool = mysql_pool;
