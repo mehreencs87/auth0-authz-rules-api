@@ -230,7 +230,10 @@ function extend (api) {
     configurable: false,
     enumerable: true,
     get:  function () {
-      var tedious = require('tedious@0.1.4');
+      var tediousSpec = require.__verquire
+        ? 'tedious@0.1.4'
+        : 'tedious';
+      var tedious = require(tediousSpec);
       var sqlserver = {
         connect: function (config) {
           var Connection = tedious.Connection;
@@ -319,7 +322,10 @@ function extend (api) {
     configurable: false,
     enumerable: true,
     get: function () {
-      return require('xtend@1.0.3');
+      var xtendSpec = require.__verquire
+        ? 'xtend@1.0.3'
+        : 'xtend';
+      return require(xtendSpec);
     }
   });
 
